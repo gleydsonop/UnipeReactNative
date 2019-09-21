@@ -8,6 +8,7 @@ import {
   ToastAndroid, 
   Platform
 } from 'react-native';
+import {Actions} from 'react-native-router-flux'
 
 export default class Login extends React.Component {
   constructor() {
@@ -20,6 +21,10 @@ export default class Login extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    header: null
+  }
+
   mudarSenha = e => {
     this.setState({
       senha: e.target.value,
@@ -27,11 +32,7 @@ export default class Login extends React.Component {
   };
 
   handleClick = () => {
-    if(Platform.OS === 'ios'){
-      alert('Logado')
-    }else{
-      ToastAndroid.show("Botão Clicado",ToastAndroid.SHORT)
-    }
+    Actions.home();
   }
 
 
@@ -60,7 +61,7 @@ export default class Login extends React.Component {
           onChangeText={(senha) => this.setState({senha})}
           secureTextEntry></TextInput>
 
-        <Button title="CLICA LOGO" onPress={this.handleClick}>          
+        <Button title="CLICA LppOGOss" onPress={this.handleClick}>          
         </Button>
       </View>
     );

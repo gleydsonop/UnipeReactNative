@@ -17,6 +17,8 @@ import {
   TextInput
 } from 'react-native';
 
+import {Router, Stack, Scene} from 'react-native-router-flux'
+
 import {
   Header,
   LearnMoreLinks,
@@ -26,16 +28,18 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import Card from './src/components/Card'
+import Login from './src/screens/Login';
+import Home from './src/screens/Home';
 
 const App = () => {
   return (
-    <View>
-      <Text style={styles.title}>
-        EAAAAAAAAAAAAaaa
-      </Text>
-      <Card></Card>
-    </View>
- 
+    <Router>
+      <Stack key='root'>
+        <Scene key='login' initial={true} component={Login}></Scene>
+        <Scene key='home' component={Home}></Scene>
+      </Stack>
+    </Router>
+    
   );
 };
 
