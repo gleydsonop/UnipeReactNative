@@ -29,14 +29,17 @@ import {
 
 import Card from './src/components/Card'
 import Login from './src/screens/Login';
+import Editar from './src/screens/Editar';
 import Home from './src/screens/Home';
+
 
 const App = () => {
   return (
     <Router>
       <Stack key='root'>
-        <Scene key='login' initial={true} component={Login}></Scene>
-        <Scene key='home' component={Home}></Scene>
+        <Scene key='login'  component={Login}></Scene>
+        <Scene key='editar' component={Editar}></Scene>
+        <Scene key='home' initial={true} component={Home}></Scene>
       </Stack>
     </Router>
     

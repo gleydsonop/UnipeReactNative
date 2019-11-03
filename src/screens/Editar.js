@@ -11,14 +11,15 @@ import {
 import {Actions} from 'react-native-router-flux'
 import Api from '../services/Api';
 
-export default class Login extends React.Component {
+export default class Editar extends React.Component {
   constructor() {
     super();
 
     this.state = {
       nome: '',
       descricao: '',
-      preco: 0
+      preco: '',
+      id: ''
       
     };
   }
@@ -37,10 +38,21 @@ export default class Login extends React.Component {
    this.setState({preco: preco})
  }
 
+ componentDidMount() {
+  Api.get(`produto/${this.props.produtoId}`).then(resposta => {
+    //alert(JSON.stringify(resposta.data.preco))
+    this.setState({nome: resposta.data.nome, descricao: resposta.data.descricao, preco: resposta.data.preco.toString(), id: resposta.data.id.toString()});
+  });
+}
+
   handleClick = () => {
-    Api.post('produto', 
-    {nome: this.state.nome , descricao: this.state.descricao, preco: this.state.preco})
-    .then(() => alert("Salvo com sucesso. Recarregue para ver o resultado."))
+    alert(JSON.stringify(this.state.id))
+    Api.put(`produto/${parseInt(this.state.id)}`,  
+    {nome: this.state.nome , descricao: this.state.descricao, preco: this.state.preco, id: parseInt(this.state.id)})
+    .then(() => alert("Atualizado com sucesso. Recarregue para ver o resultado."))
+    .catch(error => {
+      alert(JSON.stringify(error.response))
+  })
   }
 
 
@@ -74,9 +86,9 @@ export default class Login extends React.Component {
           placeholder="Informe o preço"
           style={styles.input}
           //onChange={this.mudarPreco}
+          keyboardType="number-pad"
           autoCorrect={false}
           onChangeText={this.handlePreco}
-          keyboardType="number-pad"
           ></TextInput>
 
         <Button title="Salvar" onPress={this.handleClick}>          
