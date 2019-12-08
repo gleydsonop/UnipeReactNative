@@ -26,11 +26,9 @@ export default class Card extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>ID: {this.props.petID} </Text>
         <Text>Nome: {this.props.nome} </Text>
-        <Text>Descrição: {this.props.descricao}</Text>
-        <Text>Preço: {this.props.preco}</Text>
-        <Button title="Editar" onPress={this.handleClickEditar} style={{marginBottom: 10}}></Button>
-        <View><Button title="Remover" onPress={this.handleClick} color="red"></Button></View>
+        <Text>Raca: {this.props.raca}</Text>               
       </View>
     );
   }
@@ -47,8 +45,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderColor: '#d6d7da',
-    height: 200,
-    marginBottom: 80,
+    borderColor: '#d6d7da',    
+    marginBottom: 5,
   },
 });
