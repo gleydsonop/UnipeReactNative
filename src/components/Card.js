@@ -1,27 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
-import Api from '../services/Api';
-import {Actions} from 'react-native-router-flux';
+import {View, Text, StyleSheet} from 'react-native';
 
 export default class Card extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      status: props.done ? 'Feito' : 'Não feito',
-    };
+    super(props); 
   }
-
-  handleClick = () => {
-    Api.delete(`produto/${this.props.produtoId}`).then(() => {
-      alert('Removido com sucesso. Recarregue para ver o resultado.');
-      
-      
-    });
-  };
-
-  handleClickEditar = () => {
-    Actions.editar({produtoId: this.props.produtoId});
-  };
 
   render() {
     return (

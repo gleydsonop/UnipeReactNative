@@ -9,32 +9,29 @@ export default class Home extends React.Component {
     super();
 
     this.state = {
-      produtos: [],
+      pets: [],
       loading: true,
     };
   }
 
   componentDidMount() {
-    Api.get('produtos').then(resposta => {
-      this.setState({produtos: resposta.data, loading: false});
+    Api.get().then(resposta => {
+      this.setState({pets: resposta.data, loading: false});
+    }).catch(erro => {      
+      alert(erro);
     });
   }
 
   
 
   render() {
-    const listaDeTodos = this.state.produtos.map(produto => (
-      <Card key={produto.id} produtoId={produto.id} descricao={produto.descricao} nome={produto.nome} preco={produto.preco} />
+    const listaDePets = this.state.pets.map(pet => (
+      <Card key={pet._id} petID={pet._id} nome={pet.name} raca={pet.raca} />
     ));
 
     return (
       <ScrollView>
-        <View>
-        <Button
-         
-          title="Novo Produto"         
-          onPress={() => Actions.login()}          
-        />   
+        <View>          
         <Button
           color="green"
           title="Recarregar"         
@@ -43,8 +40,8 @@ export default class Home extends React.Component {
           {this.state.loading && (
             <ActivityIndicator size="large"></ActivityIndicator>
           )}
-          <Text>Home</Text>
-          {listaDeTodos}          
+          <Text>Logado como: {this.props.usuarioLogado}</Text>
+          {listaDePets}          
           
         </View>
       </ScrollView>

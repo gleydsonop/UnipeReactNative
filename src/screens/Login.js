@@ -4,12 +4,9 @@ import {
   Text,
   TextInput,  
   StyleSheet,
-  Button,
-  ToastAndroid, 
-  Platform
+  Button
 } from 'react-native';
-import {Actions} from 'react-native-router-flux'
-import Api from '../services/Api';
+import {Actions} from 'react-native-router-flux';
 
 export default class Login extends React.Component {
   constructor() {
@@ -17,9 +14,7 @@ export default class Login extends React.Component {
 
     this.state = {
       nome: '',
-      descricao: '',
-      preco: 0
-      
+      senha: ''      
     };
   }
 
@@ -32,15 +27,11 @@ export default class Login extends React.Component {
  }
  handleDescricao = (descricao) => {
     this.setState({ descricao: descricao })
- }
- handlePreco = (preco) => {
-   this.setState({preco: preco})
- }
+ } 
 
   handleClick = () => {
-    Api.post('produto', 
-    {nome: this.state.nome , descricao: this.state.descricao, preco: this.state.preco})
-    .then(() => alert("Salvo com sucesso. Recarregue para ver o resultado."))
+    Actions.home({usuarioLogado: this.state.nome});
+
   }
 
 
@@ -49,37 +40,25 @@ export default class Login extends React.Component {
       <View style={styles.container}>
         <Text style={styles.titulo}>Unipê - React Native</Text>
 
-        <Text style={styles.textLabel}>Nome:</Text>
+        <Text style={styles.textLabel}>Usuário:</Text>
 
         <TextInput
           value={this.state.nome}
-          placeholder="Nome do Produto"
-          style={styles.input}
-          //onChange={this.mudarLogin}
+          placeholder="Nome do usuário"
+          style={styles.input}          
           autoCorrect={false}
           onChangeText={this.handleNome}></TextInput>
 
-        <Text style={styles.textLabel}>Descrição:</Text>
+        <Text style={styles.textLabel}>Senha:</Text>
         <TextInput
           value={this.state.descricao}
-          placeholder="Informe a descrição"
-          style={styles.input}
-          //onChange={this.mudarSenha}
+          placeholder="Informe a senha"
+          style={styles.input}          
+          secureTextEntry={true}
           autoCorrect={false}
           onChangeText={this.handleDescricao}
-          ></TextInput>
-          <Text style={styles.textLabel}>Preço:</Text>
-        <TextInput
-          value={this.state.preco}
-          placeholder="Informe o preço"
-          style={styles.input}
-          //onChange={this.mudarPreco}
-          autoCorrect={false}
-          onChangeText={this.handlePreco}
-          keyboardType="number-pad"
-          ></TextInput>
-
-        <Button title="Salvar" onPress={this.handleClick}>          
+          ></TextInput>         
+        <Button title="Login" onPress={this.handleClick}>          
         </Button>
       </View>
     );
